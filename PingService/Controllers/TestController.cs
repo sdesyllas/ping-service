@@ -28,7 +28,7 @@ namespace PingService.Controllers
         // GET: api/Test
         public IPStatus Get()
         {
-            return PingHost("1");
+            return PingHost("10.9.9.185");
         }
 
         // POST: api/Test
