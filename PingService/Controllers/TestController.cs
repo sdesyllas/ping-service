@@ -12,16 +12,23 @@ namespace PingService.Controllers
     {
         private static IPStatus PingHost(string nameOrAddress)
         {
-            Ping pinger = new Ping();
-            PingReply reply = pinger.Send(nameOrAddress);
-            return reply.Status;
+            try
+            {
+                Ping pinger = new Ping();
+                PingReply reply = pinger.Send(nameOrAddress);
+                return reply.Status;
+            }
+            catch (Exception e)
+            {
+                return IPStatus.DestinationHostUnreachable;
+            } 
         }
 
 
         // GET: api/Test
         public IPStatus Get()
         {
-            return PingHost("10.9.9.185");
+            return PingHost("1");
         }
 
         // POST: api/Test
