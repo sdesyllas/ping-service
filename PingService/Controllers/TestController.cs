@@ -21,6 +21,7 @@ namespace PingService.Controllers
             catch (Exception e)
             {
                 pingResponse.Details = e.ToString();
+                pingResponse.IpStatus = IPStatus.DestinationHostUnreachable;
                 return pingResponse;
             }
         }
