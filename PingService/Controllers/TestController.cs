@@ -1,32 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Web.Http;
+using PingService.Models;
 
 namespace PingService.Controllers
 {
     public class TestController : ApiController
     {
-        private static IPStatus PingHost(string nameOrAddress)
+        private static PingResponse PingHost(string nameOrAddress)
         {
+            PingResponse pingResponse = new PingResponse();
             try
             {
                 Ping pinger = new Ping();
                 PingReply reply = pinger.Send(nameOrAddress);
-                return reply.Status;
+                pingResponse.IpStatus = reply.Status;
+                pingResponse.Details = "OK";
+                return pingResponse;
             }
             catch (Exception e)
             {
-                return IPStatus.DestinationHostUnreachable;
+                pingResponse.Details = e.ToString();
+                return pingResponse;
             }
         }
 
 
         // GET: api/Test
-        public IPStatus Get(string id)
+        public PingResponse Get(string id)
         {
             return PingHost(id);
         }
