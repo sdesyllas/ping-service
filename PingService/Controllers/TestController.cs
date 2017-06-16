@@ -8,12 +8,12 @@ namespace PingService.Controllers
 {
     public class TestController : ApiController
     {
-        private static PingResponse PingHost(string nameOrAddress)
+        private static PingResponse PingHost(string nameOrAddress, int port)
         {
             PingResponse pingResponse = new PingResponse();
             try
             {
-                TcpClient client = new TcpClient(nameOrAddress, 80);
+                TcpClient client = new TcpClient(nameOrAddress, port);
                 pingResponse.Details = "OK";
                 pingResponse.IsConnected = client.Connected;
                 return pingResponse;
@@ -28,9 +28,9 @@ namespace PingService.Controllers
 
 
         // GET: api/Test
-        public PingResponse Get(string id)
+        public PingResponse Get(string ip, int port)
         {
-            return PingHost(id);
+            return PingHost(ip, port);
         }
     }
 }
