@@ -21,29 +21,14 @@ namespace PingService.Controllers
             catch (Exception e)
             {
                 return IPStatus.DestinationHostUnreachable;
-            } 
+            }
         }
 
 
         // GET: api/Test
-        public IPStatus Get()
+        public IPStatus Get(string id)
         {
-            return PingHost("10.9.9.185");
-        }
-
-        // POST: api/Test
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Test/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Test/5
-        public void Delete(int id)
-        {
+            return PingHost(id);
         }
     }
 }
