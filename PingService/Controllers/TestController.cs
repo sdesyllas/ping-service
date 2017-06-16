@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Web.Http;
 using PingService.Models;
 
@@ -12,10 +13,9 @@ namespace PingService.Controllers
             PingResponse pingResponse = new PingResponse();
             try
             {
-                Ping pinger = new Ping();
-                PingReply reply = pinger.Send(nameOrAddress);
-                pingResponse.IpStatus = reply.Status;
+                TcpClient client = new TcpClient(nameOrAddress, 80);
                 pingResponse.Details = "OK";
+                pingResponse.IsConnected = client.Connected;
                 return pingResponse;
             }
             catch (Exception e)

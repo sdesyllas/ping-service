@@ -6,5 +6,6 @@ namespace PingService.Models
     {
         public IPStatus IpStatus { get; set; }
         public string Details { get; set; }
+        public bool IsConnected { get; set; }
     }
 }
